@@ -1,5 +1,6 @@
 package org.launchcode.techjobs_oo;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Job {
@@ -30,6 +31,19 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
+    public Job(String name) {
+        this.name = name;
+    }
+
+    private Object fillInTheBlank(Object entry) {
+        String blankSpace;
+        blankSpace = "Data not available";
+
+        if (entry == null) {
+            entry = blankSpace;
+        }
+        return entry;
+    }
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 
@@ -46,6 +60,19 @@ public class Job {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        String message;
+
+        message = "\nID: " + id +
+                "\nName: " + name +
+                "\nEmployer: " + employer +
+                "\nLocation: " + location +
+                "\nPosition Type: " + positionType +
+                "\nCore Competency: " + coreCompetency + " \n";
+
+        return message;
+    }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.

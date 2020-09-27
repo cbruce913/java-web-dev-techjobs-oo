@@ -1,23 +1,27 @@
 package org.launchcode.techjobs_oo.Tests;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.launchcode.techjobs_oo.*;
 
 import static org.junit.Assert.*;
 
 public class JobTest {
-    Job testJob1;
-    Job testJob2;
-    Job testJob3;
-    Job testJob4;
+    static Job testJob1;
+    static Job testJob2;
+    static Job testJob3;
+    static Job testJob4;
+    static Job testJob5;
+    String jobAsString = testJob1.toString();
 
-    @Before
-    public void createJobObjects() {
+    @BeforeClass
+    public static void createJobObjects() {
         testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         testJob2 = new Job("Web Developer", new Employer("LaunchCode"), new Location("St. Louis"), new PositionType("Front-end developer"), new CoreCompetency("JavaScript"));
         testJob3 = new Job("Ice cream taster", new Employer(""), new Location("Home"), new PositionType("UX"), new CoreCompetency("Taste"));
         testJob4 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        testJob5 = new Job();
     }
 
     @Test
@@ -53,5 +57,41 @@ public class JobTest {
     @Test
     public void testJobsForEquality() {
         assertFalse(testJob1.getId() == testJob4.getId());
+    }
+
+    @Test
+    public void blankFirstAndLastLineTest() {
+        assertEquals(jobAsString.indexOf("\n"), 0);
+        assertEquals(jobAsString.lastIndexOf("\n"), jobAsString.length()-1);
+    }
+
+    @Test
+    public void fieldLabelTest() {
+        assertTrue(jobAsString.contains("ID"));
+        assertTrue(jobAsString.contains("Name"));
+        assertTrue(jobAsString.contains("Employer"));
+        assertTrue(jobAsString.contains("Location"));
+        assertTrue(jobAsString.contains("Position Type"));
+        assertTrue(jobAsString.contains("Core Competency"));
+    }
+
+    @Test
+    public void fieldNewLineTest() {
+        assertTrue(jobAsString.contains("\nID"));
+        assertTrue(jobAsString.contains("\nName"));
+        assertTrue(jobAsString.contains("\nEmployer"));
+        assertTrue(jobAsString.contains("\nLocation"));
+        assertTrue(jobAsString.contains("\nPosition Type"));
+        assertTrue(jobAsString.contains("\nCore Competency"));
+    }
+
+    @Test
+    public void emptyFieldTest() {
+        assertTrue(testJob5.toString().contains("Data not available"));
+    }
+
+    @Test
+    public void jobExistenceTestBONUS() {
+        assertEquals("OOPS! This job does not seem to exist.", testJob5.toString());
     }
 }
