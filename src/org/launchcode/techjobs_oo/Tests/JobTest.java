@@ -21,7 +21,7 @@ public class JobTest {
         testJob2 = new Job("Web Developer", new Employer("LaunchCode"), new Location("St. Louis"), new PositionType("Front-end developer"), new CoreCompetency("JavaScript"));
         testJob3 = new Job("Ice cream taster", new Employer(""), new Location("Home"), new PositionType("UX"), new CoreCompetency("Taste"));
         testJob4 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        testJob5 = new Job();
+        testJob5 = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
     }
 
     @Test
@@ -87,11 +87,11 @@ public class JobTest {
 
     @Test
     public void emptyFieldTest() {
-        assertTrue(testJob5.toString().contains("Data not available"));
+        assertTrue(testJob3.toString().contains("Data not available"));
     }
 
     @Test
     public void jobExistenceTestBONUS() {
-        assertEquals("OOPS! This job does not seem to exist.", testJob5.toString());
+        assertTrue(testJob5.toString().contains("OOPS! This job does not seem to exist."));
     }
 }

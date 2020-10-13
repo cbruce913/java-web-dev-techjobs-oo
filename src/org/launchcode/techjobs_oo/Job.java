@@ -1,6 +1,5 @@
 package org.launchcode.techjobs_oo;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Job {
@@ -35,15 +34,6 @@ public class Job {
         this.name = name;
     }
 
-    private Object fillInTheBlank(Object entry) {
-        String blankSpace;
-        blankSpace = "Data not available";
-
-        if (entry == null) {
-            entry = blankSpace;
-        }
-        return entry;
-    }
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 
@@ -63,6 +53,32 @@ public class Job {
     @Override
     public String toString() {
         String message;
+        String blankSpace;
+        String oh_no;
+        blankSpace = "Data not available";
+        oh_no = "OOPS! This job does not seem to exist.";
+
+
+        if (name == "") {
+            name = blankSpace;
+        }
+
+        if (employer.getValue() == "") {
+            employer.setValue(blankSpace);
+        }
+
+        if (location.getValue() == "") {
+            location.setValue(blankSpace);
+        }
+
+        if (positionType.getValue() == "") {
+            positionType.setValue(blankSpace);
+        }
+
+        if (coreCompetency.getValue() == "") {
+            coreCompetency.setValue(blankSpace);
+        }
+
 
         message = "\nID: " + id +
                 "\nName: " + name +
@@ -70,6 +86,11 @@ public class Job {
                 "\nLocation: " + location +
                 "\nPosition Type: " + positionType +
                 "\nCore Competency: " + coreCompetency + " \n";
+
+        if (name == blankSpace && employer.getValue() == blankSpace && location.getValue() == blankSpace && positionType.getValue() == blankSpace && coreCompetency.getValue() == blankSpace) {
+            message = "\nID: " + id +
+                    "\n" + oh_no;
+        }
 
         return message;
     }
